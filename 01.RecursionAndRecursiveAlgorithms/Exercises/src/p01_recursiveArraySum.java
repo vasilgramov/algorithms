@@ -18,7 +18,8 @@ public class p01_recursiveArraySum {
         if (index == 0) {
             return array[index];
         } else {
-            return array[index] + getArraySum(array, index - 1);
+            int sum = array[index] + getArraySum(array, index - 1);
+            return sum;
         }
     }
 }
