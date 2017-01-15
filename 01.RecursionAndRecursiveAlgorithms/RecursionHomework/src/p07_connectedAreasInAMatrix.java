@@ -1,5 +1,24 @@
 import java.util.Scanner;
 
+/*
+4
+9
+000*000*0
+000*000*0
+000*000*0
+0000*0*00
+ */
+
+/*
+5
+10
+*00*000*00
+*00*000*00
+*00*****00
+*00*000*00
+*00*000*00
+ */
+
 public class p07_connectedAreasInAMatrix {
     static int areasCounter = 0;
     static int currentSize = 0;
