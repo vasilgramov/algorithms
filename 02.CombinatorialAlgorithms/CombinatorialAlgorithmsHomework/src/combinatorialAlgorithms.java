@@ -8,6 +8,9 @@ public class combinatorialAlgorithms {
     static boolean[] taken = new boolean[n];
     static int[] allElements = new int[]{1, 2, 3, 4, 5};
 
+    static String[] arrAsString = new String[4];
+    static String[] elementsAsString = new String[] { "R", "D", "L", "U" };
+
     static int[] repetitionArray = new int[]{1, 5, 5, 5, 5, 5};
 
     static int[] nArray = new int[n];
@@ -19,7 +22,7 @@ public class combinatorialAlgorithms {
 
 //        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
@@ -31,7 +34,7 @@ public class combinatorialAlgorithms {
 //        Array.Sort(arr);
 //        createPermutationsWithRepetitionWithoutRepetitionRecursiveOptimized(arr, 0, arr.length);
 
-        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
+//        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
 //        createCombinationsWithoutRepetition(0, 1);   // n! / (n - k)! * k!
 
         System.out.println(count);
@@ -162,22 +165,22 @@ public class combinatorialAlgorithms {
 
 
     private static void createVariationsWithoutRepetitionRecursiveOptimized(int index) {  // with swap
-        if (index == arr.length) {
-            System.out.println(Arrays.toString(arr));
+        if (index == arrAsString.length) {
+            System.out.println(Arrays.toString(arrAsString));
             count++;
             return;
         }
 
-        for (int i = index; i < n; i++) {
-            int temp = allElements[i];
-            allElements[i] = allElements[index];
-            allElements[index] = allElements[i];
+        for (int i = index; i < arrAsString.length; i++) {
+            String temp = elementsAsString[i];
+            elementsAsString[i] = elementsAsString[index];
+            elementsAsString[index] = elementsAsString[i];
 
-            arr[index] = temp;
+            arrAsString[index] = temp;
             createVariationsWithoutRepetitionRecursiveOptimized(index + 1);
 
-            allElements[index] = allElements[i];
-            allElements[i] = temp;
+            elementsAsString[index] = elementsAsString[i];
+            elementsAsString[i] = temp;
         }
     }
 
