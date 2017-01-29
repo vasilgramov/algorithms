@@ -4,12 +4,22 @@ import java.util.Scanner;
 public class p01_quickSortImplementation {
     static boolean hasWallIndex = false;
     static int wallIndexForRightPart = 0;
-    static int counter = 0;
 
     static boolean hasPivot = false;
     static int realPivotIndex = 0;
 
     public static void main(String[] args) {
+        /*
+        sample inputs
+        5 4 3 2 1
+        3 3 8 4 4 3 2
+        8 1 6 2 0 7 2
+        11 16 2 8 1 9 4 7
+        4 0 3 9 9 3 9
+        5 1 1 0 9 8 0
+        6 9 3 7 7 6 5
+         */
+
         Scanner in = new Scanner(System.in);
 
         String[] numbersAsString = in.nextLine().split(" ");

@@ -1,8 +1,26 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class p02_mergeSortImplementation {
     public static void main(String[] args) {
-        int[] unsortedElements = { 11,16, 2, 8, 1, 9, 4, 7 };
+        /*
+        sample inputs
+        5 4 3 2 1
+        3 3 8 4 4 3 2
+        8 1 6 2 0 7 2
+        11 16 2 8 1 9 4 7
+        4 0 3 9 9 3 9
+        5 1 1 0 9 8 0
+        6 9 3 7 7 6 5
+         */
+
+        Scanner in = new Scanner(System.in);
+
+        String[] elementsAsString = in.nextLine().split("\\s+");
+        int[] unsortedElements = new int[elementsAsString.length];
+        for (int i = 0; i < elementsAsString.length; i++) {
+            unsortedElements[i] = Integer.parseInt(elementsAsString[i]);
+        }
 
         mergeSort(unsortedElements, 0, unsortedElements.length - 1);
 
