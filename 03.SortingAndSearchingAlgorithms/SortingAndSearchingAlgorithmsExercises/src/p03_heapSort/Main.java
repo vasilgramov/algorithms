@@ -15,7 +15,7 @@ public class Main {
         int[] unsortedElements = { 7, 9, 6, 17, 11 };
         MaxHeap minHeap1 = new MaxHeap(unsortedElements);
 
-        minHeap1.add(5);
+//        minHeap1.add(5);
 //        minHeap1.add(4);
 //        minHeap1.add(3);
 //        minHeap1.add(2);
