@@ -22,7 +22,7 @@ public class combinatorialAlgorithms {
 
 //        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
@@ -129,7 +129,6 @@ public class combinatorialAlgorithms {
             return;
         }
 
-        HashSet<Integer> swapped = new HashSet<>();
         createPermutationsWithoutRepetitionRecursive(index + 1);
         for (int i = index + 1; i < allElements.length; i++) {
             int current = allElements[index];
@@ -140,7 +139,6 @@ public class combinatorialAlgorithms {
 
             allElements[i] = allElements[index];
             allElements[index] = current;
-
         }
     }
 
