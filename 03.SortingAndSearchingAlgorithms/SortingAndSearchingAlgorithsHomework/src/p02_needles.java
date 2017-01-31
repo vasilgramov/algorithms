@@ -8,45 +8,53 @@ public class p02_needles {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         StringBuilder result = new StringBuilder();
+        TreeMap<Integer, Integer> numbers = new TreeMap<>();
 
-
-        TreeSet<Integer> appearedNumbers = new TreeSet<>();
         String[] commandArgs = in.readLine().split(" ");
         int numbersCount = Integer.parseInt(commandArgs[0]);
         int needlesCount = Integer.parseInt(commandArgs[1]);
 
-        int[] zerosToIndex = new int[numbersCount];
-        ArrayList<Integer> numbers = new ArrayList<>();
-
-        int zerosCounter = 0;
-        String[] lineAsString = in.readLine().split(" ");
+        int zeroes = 0;
+        int index = 0;
+        String[] numbersAsString = in.readLine().split("\\s+");
         for (int i = 0; i < numbersCount; i++) {
-            int currentNumber = Integer.parseInt(lineAsString[i]);
-            if (currentNumber == 0) {
-                zerosToIndex[i] = zerosCounter++;
-            } else {
-                numbers.add(currentNumber);
-                appearedNumbers.add(currentNumber);
+            int currentNumber = Integer.parseInt(numbersAsString[i]);
+
+            if (currentNumber != 0 && !numbers.containsKey(currentNumber)) {
+                numbers.put(currentNumber, index - zeroes);
             }
+
+            if (currentNumber == 0) {
+                zeroes++;
+            } else {
+                zeroes = 0;
+            }
+
+            index++;
         }
 
-        String[] needlesAsString = in.readLine().split(" ");
+        String[] needles = in.readLine().split("\\s+");
         for (int i = 0; i < needlesCount; i++) {
-            int currentElement = Integer.parseInt(needlesAsString[i]);
+            int currentNeedle = Integer.parseInt(needles[i]);
 
-            if (currentElement <= appearedNumbers.first()) {
-                result.append("0 ");
-                continue;
+            try {
+                int searchedNumber  = numbers.containsKey(currentNeedle) ? currentNeedle : numbers.ceilingKey(currentNeedle);
+                int sex = numbers.get(searchedNumber);
+
+                result.append(sex + " ");
+            } catch (NullPointerException exc) {
+                boolean hasFound = false;
+                for (int j = numbersAsString.length - 1; j >= 0; j--) {
+                    if (!numbersAsString[j].equals("0")) {
+                        result.append((j + 1) + " ");
+                        hasFound = true;
+                        break;
+                    }
+                }
+
+                if (!hasFound)
+                    result.append("0 ");
             }
-
-            if (currentElement > appearedNumbers.last()) {
-                result.append(numbersCount + " " );
-                continue;
-            }
-
-            currentElement = appearedNumbers.contains(currentElement) ? currentElement : appearedNumbers.floor(currentElement);
-
-            // binary search
         }
 
         System.out.println(result);
