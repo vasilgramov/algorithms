@@ -17,21 +17,7 @@ public class p02_needles {
         int zeroes = 0;
         int index = 0;
         String[] numbersAsString = in.readLine().split("\\s+");
-        for (int i = 0; i < numbersCount; i++) {
-            int currentNumber = Integer.parseInt(numbersAsString[i]);
-
-            if (currentNumber != 0 && !numbers.containsKey(currentNumber)) {
-                numbers.put(currentNumber, index - zeroes);
-            }
-
-            if (currentNumber == 0) {
-                zeroes++;
-            } else {
-                zeroes = 0;
-            }
-
-            index++;
-        }
+        fillTreeMap(numbers, numbersCount, zeroes, index, numbersAsString);
 
         String[] needles = in.readLine().split("\\s+");
         for (int i = 0; i < needlesCount; i++) {
@@ -58,5 +44,23 @@ public class p02_needles {
         }
 
         System.out.println(result);
+    }
+
+    private static void fillTreeMap(TreeMap<Integer, Integer> numbers, int numbersCount, int zeroes, int index, String[] numbersAsString) {
+        for (int i = 0; i < numbersCount; i++) {
+            int currentNumber = Integer.parseInt(numbersAsString[i]);
+
+            if (currentNumber != 0 && !numbers.containsKey(currentNumber)) {
+                numbers.put(currentNumber, index - zeroes);
+            }
+
+            if (currentNumber == 0) {
+                zeroes++;
+            } else {
+                zeroes = 0;
+            }
+
+            index++;
+        }
     }
 }
