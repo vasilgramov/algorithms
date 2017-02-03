@@ -3,17 +3,16 @@ import java.util.Arrays;
 public class p01_longestIncreasingSubsequence {
     public static void main(String[] args) {
 // 30, 1, 20, 2, 3, -1 -> 1, 2, 3
-// 3, 14, 5, 12, 15, 7, 8, 9, 11, 10, 1 -> 3, 5, 7, 8, 9, 11
 // 3, 14, 5, 12, 15, 7, 8, 9, 11, 10, 1, 12, 13, 14, 20, 15, 30, 16, 17, 40, 18, 19, 20 -> 3, 5, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 
-        int[] sequence = { 3, 2, 1 };
+        int[] sequence = { 14, 5, 12, 15, 7, 8, 9, 11, 10, 1 };
         int[] LIS = findLongestIncreasingSubsequence(sequence);
         System.out.println("Longest increasing subsequence (LIS)");
         System.out.println("Length: " + LIS.length);
         System.out.println(Arrays.toString(LIS));
     }
 
-    private static int[] findLongestIncreasingSubsequence(int[] sequence) {
+    public static int[] findLongestIncreasingSubsequence(int[] sequence) {
         if (sequence.length == 0)
             return sequence;
 
