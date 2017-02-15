@@ -2,30 +2,32 @@ import java.util.*;
 
 public class p03_dividingPresents {
 
-    static int sumOfAllPresents;
-    static int possiblyBestSum;
     static List<Integer> bestPresents;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         String[] inputNumbersAsStrings = in.nextLine().split(",");
-        
-        sumOfAllPresents = 0;
+
         int[] numbers =  new int[inputNumbersAsStrings.length];
         for (int i = 0; i < inputNumbersAsStrings.length; i++) {
             int currentNumber = Integer.parseInt(inputNumbersAsStrings[i]);
             numbers[i] = currentNumber;
-            sumOfAllPresents += currentNumber;
         }
-
-        possiblyBestSum = sumOfAllPresents / 2;
 
         int smallestDifference = findSmallDifference(numbers);
         System.out.println("Difference: " + smallestDifference);
         System.out.println("Presents one of the twins takes: " + bestPresents);
     }
 
-    private static int findSmallDifference(int[] numbers) {
+    public static int findSmallDifference(int[] numbers) {
+        int sumOfAllPresents = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            int currentNumber = numbers[i];
+            sumOfAllPresents += currentNumber;
+        }
+
+        int possiblyBestSum = sumOfAllPresents / 2;
+
         Map<List<Integer>, Integer> sumsByPresents = new HashMap<>();
         List<Integer> firstPresent = new ArrayList<>();
         firstPresent.add(numbers[0]);
