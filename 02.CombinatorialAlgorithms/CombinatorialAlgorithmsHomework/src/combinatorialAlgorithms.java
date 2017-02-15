@@ -8,8 +8,8 @@ public class combinatorialAlgorithms {
     static boolean[] taken = new boolean[n];
     static int[] allElements = new int[]{1, 2, 3, 4, 5};
 
-    static String[] arrAsString = new String[4];
-    static String[] elementsAsString = new String[] { "R", "D", "L", "U" };
+    static int[] arrAsString = new int[5];
+    static int[] elementsAsString = new int[] { 1, 2, 3, 4, 5 };
 
     static int[] repetitionArray = new int[]{1, 5, 5, 5, 5, 5};
 
@@ -22,7 +22,7 @@ public class combinatorialAlgorithms {
 
 //        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
@@ -170,7 +170,7 @@ public class combinatorialAlgorithms {
         }
 
         for (int i = index; i < arrAsString.length; i++) {
-            String temp = elementsAsString[i];
+            int temp = elementsAsString[i];
             elementsAsString[i] = elementsAsString[index];
             elementsAsString[index] = elementsAsString[i];
 

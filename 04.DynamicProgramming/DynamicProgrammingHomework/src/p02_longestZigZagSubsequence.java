@@ -122,11 +122,11 @@ public class p02_longestZigZagSubsequence {
                 }
             }
 
-
             /*
                 If current number is added to any ArrayList and it creates LSL/SLS do not do anything.
                 Else get only the first longest LSL/SLS so far, create new ArrayList and add current number.
             */
+
             if (!isCreatingSLS) {
                 ArrayList<Integer> toAdd = new ArrayList<>();
                 outerLoop:
