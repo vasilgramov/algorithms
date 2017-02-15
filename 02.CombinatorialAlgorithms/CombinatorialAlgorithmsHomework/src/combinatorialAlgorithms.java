@@ -22,7 +22,7 @@ public class combinatorialAlgorithms {
 
 //        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
@@ -34,7 +34,7 @@ public class combinatorialAlgorithms {
 //        Array.Sort(arr);
 //        createPermutationsWithRepetitionWithoutRepetitionRecursiveOptimized(arr, 0, arr.length);
 
-//        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
+        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
 //        createCombinationsWithoutRepetition(0, 1);   // n! / (n - k)! * k!
 
         System.out.println(count);
