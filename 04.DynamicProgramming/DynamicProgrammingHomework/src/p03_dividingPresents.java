@@ -2,7 +2,6 @@ import java.util.*;
 
 public class p03_dividingPresents {
 
-    static List<Integer> bestPresents;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -14,63 +13,79 @@ public class p03_dividingPresents {
             numbers[i] = currentNumber;
         }
 
-        int smallestDifference = findSmallDifference(numbers);
-        System.out.println("Difference: " + smallestDifference);
-        System.out.println("Presents one of the twins takes: " + bestPresents);
+        int sum = findSumWithSmallestDifference(numbers);
+        System.out.println(sum);
+
+        Map<Integer, List<Integer>> numbersBySum = new HashMap<>();
+        numbersBySum.put(0, new ArrayList<>());
+
+        List<Integer> numbersWithSum = getNumbersWithSum(numbers, sum, numbersBySum);
+        System.out.println(numbersWithSum);
     }
 
-    public static int findSmallDifference(int[] numbers) {
-        int sumOfAllPresents = 0;
+    private static List<Integer> getNumbersWithSum(int[] numbers, int sum, Map<Integer, List<Integer>> numbersBySum) {
+        List<Integer> takenNumbers = new ArrayList<>();
+        outerLoop:
         for (int i = 0; i < numbers.length; i++) {
             int currentNumber = numbers[i];
-            sumOfAllPresents += currentNumber;
-        }
 
-        int possiblyBestSum = sumOfAllPresents / 2;
+            Map<Integer, List<Integer>> newNumbersBySum = new HashMap<>();
 
-        Map<List<Integer>, Integer> sumsByPresents = new HashMap<>();
-        List<Integer> firstPresent = new ArrayList<>();
-        firstPresent.add(numbers[0]);
-        sumsByPresents.put(firstPresent, numbers[0]);
+            for (Map.Entry<Integer, List<Integer>> integerListEntry : numbersBySum.entrySet()) {
+                int currentSum = integerListEntry.getKey();
+                List<Integer> currentNumbers = integerListEntry.getValue();
 
-        bestPresents = firstPresent;
-        int minDifferenceSoFar = possiblyBestSum - numbers[0];
+                int newSum = currentSum + currentNumber;
+                List<Integer> newNumbers = new ArrayList<>(currentNumbers);
+                newNumbers.add(currentNumber);
 
-        for (int i = 1; i < numbers.length; i++) {
-            int currentPresent = numbers[i];
+                if (newSum == sum) {
+                    takenNumbers = newNumbers;
 
-            Map<List<Integer>, Integer> newSumsByPresents = new HashMap<>();
-
-            for (Map.Entry<List<Integer>, Integer> listIntegerEntry : sumsByPresents.entrySet()) {
-                List<Integer> newPresents = new ArrayList<>();
-                newPresents.add(currentPresent);
-                int newSumOfPresents = currentPresent;
-
-                List<Integer> currentPresents =  listIntegerEntry.getKey();
-                int currentSumOfPresents = listIntegerEntry.getValue();
-
-                newPresents.addAll(currentPresents);
-                newSumOfPresents += currentSumOfPresents;
-
-                newSumsByPresents.put(newPresents, newSumOfPresents);
-
-                int currentDiff = Math.abs(possiblyBestSum - newSumOfPresents);
-                if (currentDiff < minDifferenceSoFar) {
-                    minDifferenceSoFar = currentDiff;
-                    bestPresents = newPresents;
+                    break outerLoop;
                 }
+
+                newNumbersBySum.put(newSum, newNumbers);
             }
 
-            for (Map.Entry<List<Integer>, Integer> listIntegerEntry : newSumsByPresents.entrySet()) {
-                List<Integer> key = listIntegerEntry.getKey();
-                int value = listIntegerEntry.getValue();
-
-                sumsByPresents.put(key, value);
+            for (Map.Entry<Integer, List<Integer>> integerListEntry : newNumbersBySum.entrySet()) {
+                numbersBySum.put(integerListEntry.getKey(), integerListEntry.getValue());
             }
         }
 
-        int sumOfBestPresents = sumsByPresents.get(bestPresents);
-        int smallestDifference = Math.abs(Math.abs(sumOfAllPresents - sumOfBestPresents) - sumOfBestPresents);
-        return smallestDifference;
+        return takenNumbers;
+    }
+
+    public static int findSumWithSmallestDifference(int[] numbers) {
+        int sumOfAllNumbers = 0;
+        for (int number : numbers) {
+            sumOfAllNumbers += number;
+        }
+
+        int possibleBestSum = sumOfAllNumbers / 2;
+        int bestSum = 0;
+
+        Set<Integer> possibleSums = new HashSet<>();
+        possibleSums.add(0);
+
+        for (int currentNumber : numbers) {
+            Set<Integer> newSums = new HashSet<>();
+
+            for (Integer possibleSum : possibleSums) {
+                int currentSum = currentNumber + possibleSum;
+
+                if (currentSum == possibleBestSum)
+                    return currentSum;
+
+                if (Math.abs(possibleBestSum - currentSum) < Math.abs(possibleBestSum - bestSum))
+                    bestSum = currentSum;
+
+                newSums.add(currentSum);
+            }
+
+            possibleSums.addAll(newSums);
+        }
+
+        return bestSum;
     }
 }
