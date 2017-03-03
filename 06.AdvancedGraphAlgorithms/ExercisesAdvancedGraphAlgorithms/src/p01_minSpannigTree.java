@@ -70,9 +70,7 @@ public class p01_minSpannigTree {
                 minSpanningTree.add(graphEdge);
 
                 int realParent = rootStartNode;
-                if (startNode != rootStartNode) {
-                    realParent = rootStartNode;
-                } else if (endNode != rootEndNode) {
+                if (endNode != rootEndNode) {
                     realParent = rootEndNode;
                 }
 
