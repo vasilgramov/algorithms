@@ -1,6 +1,6 @@
 public class p04_floydWarshall {
 
-    private static final int MAGIC_NUMBER = Integer.MAX_VALUE / 2 - 666;
+    private static final int MAGIC_NUMBER = Integer.MAX_VALUE / 2 - 2017;
 
     public static void main(String[] args) {
         int[][] pattern = {
