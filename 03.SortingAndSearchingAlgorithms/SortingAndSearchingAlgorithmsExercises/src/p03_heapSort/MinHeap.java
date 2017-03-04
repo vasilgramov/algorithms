@@ -97,7 +97,7 @@ public class MinHeap {
             if (parent < leftChild && parent < rightChild)
                 return true;
 
-            if (leftChild < rightChild) {
+            if (leftChild <= rightChild) {
                 if (leftChild < parent) {
                     this.elements.set(index, leftChild);
                     this.elements.set(leftChildIndex, parent);
@@ -105,9 +105,7 @@ public class MinHeap {
                     if (heapfifyDown(leftChildIndex))
                         return true;
                 }
-            }
-
-            if (rightChild < leftChild) {
+            } else {
                 if (rightChild < parent) {
                     this.elements.set(index, rightChild);
                     this.elements.set(rightChildIndex, parent);
