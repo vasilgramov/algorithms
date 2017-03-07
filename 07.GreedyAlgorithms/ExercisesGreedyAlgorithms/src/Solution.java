@@ -10,26 +10,14 @@ class Solution {
 
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
-        String sentence = in.nextLine();
+        String opponent = in.next(); // opponent's draw
+        String me = in.next(); // my draw
 
-        StringBuilder builder = new StringBuilder(sentence);
-        for (int i = 0; i < builder.length(); i++) {
-            if (builder.charAt(i) == 'a' ||
-                    builder.charAt(i) == 'A' ||
-                    builder.charAt(i) == 'e' ||
-                    builder.charAt(i) == 'E' ||
-                    builder.charAt(i) == 'i' ||
-                    builder.charAt(i) == 'I' ||
-                    builder.charAt(i) == 'o' ||
-                    builder.charAt(i) == 'O' ||
-                    builder.charAt(i) == 'u' ||
-                    builder.charAt(i) == 'U') {
-                builder.insert(i + 1, "p");
-                builder.insert(i + 2, Character.toChars(builder.charAt(i)));
-                i += 2;
-            }
-        }
+        // Write an action using System.out.println()
+        // To debug: System.err.println("Debug messages...");
 
-        System.out.println(builder);
+
+        // your opponent next draw followed by the draw to beat him, or "CHEATER"
+        System.out.println("opponentNextDraw myNextDraw");
     }
 }

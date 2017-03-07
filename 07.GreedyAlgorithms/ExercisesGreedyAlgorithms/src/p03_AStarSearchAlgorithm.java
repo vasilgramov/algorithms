@@ -2,15 +2,15 @@ import java.util.*;
 
 public class p03_AStarSearchAlgorithm {
 
-    private static char[][] map =
-    {
-        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' },
-        { '-', '-', '-', 'W', '*', '-', '-', '-', '-', '-', '-' },
-        { '-', '-', '-', 'W', 'W', 'W', 'W', 'W', '-', '-', '-' },
-        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' },
-        { '-', '-', '-', '-', '-', '-', '-', 'P', '-', '-', '-' },
-        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' }
-    };
+//    private static char[][] map =
+//    {
+//        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' },
+//        { '-', '-', '-', 'W', '*', '-', '-', '-', '-', '-', '-' },
+//        { '-', '-', '-', 'W', 'W', 'W', 'W', 'W', '-', '-', '-' },
+//        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' },
+//        { '-', '-', '-', '-', '-', '-', '-', 'P', '-', '-', '-' },
+//        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' }
+//    };
 
 //    private static char[][] map =
 //    {
@@ -32,6 +32,17 @@ public class p03_AStarSearchAlgorithm {
 //        { '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-' }
 //    };
 
+    private static char[][] map =
+            {
+                    { 'P', 'W', '-', 'W', '-', '-' },
+                    { '-', '-', 'W', '-', 'W', '-' },
+                    { '-', 'W', 'W', 'W', 'W', '-' },
+                    { '-', 'W', 'W', 'W', '-', '*' },
+                    { '-', '-', '-', '-', '-', '-' }
+
+            };
+
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -40,6 +51,10 @@ public class p03_AStarSearchAlgorithm {
 
         AStar aStar = new AStar(map);
         List<int[]> path = aStar.findShortestPath(playerCoordinates, destinationCoordinates);
+        for (int[] ints : path) {
+            System.out.println(ints[0] + " " + ints[1]);
+        }
+
 
         for (int[] cell : path) {
             int row = cell[0];
@@ -76,7 +91,7 @@ public class p03_AStarSearchAlgorithm {
         return toReturn;
     }
 
-    private static class AStar {
+    public static class AStar {
         private static final int INFINITY = Integer.MAX_VALUE / 2 - 2017;
 
         private char[][] map;
