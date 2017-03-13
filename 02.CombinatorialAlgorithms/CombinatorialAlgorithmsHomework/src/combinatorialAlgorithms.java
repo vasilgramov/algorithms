@@ -3,13 +3,12 @@ import java.util.HashSet;
 
 public class combinatorialAlgorithms {
     static int n = 5;
-    static int[] arr = new int[3];
+    static int[] arr = new int[4];
     static int count = 0;
     static boolean[] taken = new boolean[n];
     static int[] allElements = new int[]{1, 2, 3, 4, 5};
 
-    static int[] arrAsString = new int[5];
-    static int[] elementsAsString = new int[] { 1, 2, 3, 4, 5 };
+
 
     static int[] repetitionArray = new int[]{1, 5, 5, 5, 5, 5};
 
@@ -22,7 +21,7 @@ public class combinatorialAlgorithms {
 
 //        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
@@ -34,7 +33,7 @@ public class combinatorialAlgorithms {
 //        Array.Sort(arr);
 //        createPermutationsWithRepetitionWithoutRepetitionRecursiveOptimized(arr, 0, arr.length);
 
-        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
+//        createCombinationsWithRepetition(0, 1);    // (n + k - 1)! / (n - 1)! * k!
 //        createCombinationsWithoutRepetition(0, 1);   // n! / (n - k)! * k!
 
         System.out.println(count);
@@ -143,24 +142,26 @@ public class combinatorialAlgorithms {
     }
 
     private static void createVariationsWithoutRepetitionRecursive(int index) {
-        if (index == arr.length) {
-            System.out.println(Arrays.toString(arr));
-            count++;
-            return;
-        }
-
-        for (int i = 1; i <= n; i++) {
-            if (!taken[i - 1]) {
-                taken[i - 1] = true;
-
-                arr[index] = i;
-                createVariationsWithoutRepetitionRecursive(index + 1);
-
-                taken[i - 1] = false;
+            if (index == arr.length) {
+                System.out.println(Arrays.toString(arr));
+                count++;
+                return;
             }
-        }
+
+            for (int i = 1; i <= n; i++) {
+                if (!taken[i - 1]) {
+                    taken[i - 1] = true;
+
+                    arr[index] = i;
+                    createVariationsWithoutRepetitionRecursive(index + 1);
+
+                    taken[i - 1] = false;
+                }
+            }
     }
 
+    static int[] arrAsString = new int[4];
+    static int[] elementsAsString = new int[] { 1, 2, 3, 4, 5, 6, 7 };
 
     private static void createVariationsWithoutRepetitionRecursiveOptimized(int index) {  // with swap
         if (index == arrAsString.length) {
