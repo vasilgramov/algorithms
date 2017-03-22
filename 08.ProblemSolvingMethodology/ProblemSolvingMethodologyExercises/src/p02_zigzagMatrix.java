@@ -9,7 +9,6 @@ public class p02_zigzagMatrix {
     private static int[][] maxPath;
     private static int[][] previousIndex;
 
-
     public static void main(String[] args) {
         read();
 
