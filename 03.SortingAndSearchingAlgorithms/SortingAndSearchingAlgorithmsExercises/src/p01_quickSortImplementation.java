@@ -1,115 +1,46 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class p01_quickSortImplementation {
-    static boolean hasWallIndex = false;
-    static int wallIndexForRightPart = 0;
-
-    static boolean hasPivot = false;
-    static int realPivotIndex = 0;
 
     public static void main(String[] args) {
-        /*
-        sample inputs
-        5 4 3 2 1
-        3 3 8 4 4 3 2
-        8 1 6 2 0 7 2
-        11 16 2 8 1 9 4 7
-        4 0 3 9 9 3 9
-        5 1 1 0 9 8 0
-        6 9 3 7 7 6 5
-         */
-
         Scanner in = new Scanner(System.in);
 
-        String[] numbersAsString = in.nextLine().split(" ");
-        int[] unsortedNumbers = new int[numbersAsString.length];
-        for (int i = 0; i < numbersAsString.length; i++) {
-            unsortedNumbers[i] = Integer.parseInt(numbersAsString[i]);
+        int size = in.nextInt();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = in.nextInt();
         }
 
-        applyQuickLeftPart(unsortedNumbers, unsortedNumbers.length - 1, 0);
-
-        applyQuickRightPart(unsortedNumbers, unsortedNumbers.length - 1, wallIndexForRightPart);
-        System.out.println(Arrays.toString(unsortedNumbers));
+        quickSort(array, 0, array.length - 1);
     }
 
-    private static boolean applyQuickRightPart(int[] numbers, int pivotIndex, int wallIndexForRightPart) {
-        if (wallIndexForRightPart >= numbers.length - 1 || pivotIndex == wallIndexForRightPart)
-            return true;
+    private static void quickSort(int[] array, int first, int last) {
+        if (first >= last)
+            return;
 
-        int copyWallIndex = wallIndexForRightPart;
-
-        boolean isPivotIndexTheLargest = true;
-
-        for (int i = wallIndexForRightPart; i < pivotIndex; i++) {
-            if (numbers[i] <= numbers[pivotIndex]) {
-                int temp = numbers[wallIndexForRightPart];
-                numbers[wallIndexForRightPart] = numbers[i];
-                numbers[i] = temp;
-
-                wallIndexForRightPart++;
-            } else {
-                isPivotIndexTheLargest = false;
+        int pivot = array[last];
+        int i = first;
+        for (int j = first; j < last; j++) {
+            if (array[j] <= pivot) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
             }
         }
-
-        int temp = numbers[wallIndexForRightPart];
-        numbers[wallIndexForRightPart] = numbers[pivotIndex];
-        numbers[pivotIndex] = temp;
-
-        if (isPivotIndexTheLargest) {
-            if (applyQuickRightPart(numbers, pivotIndex - 1, copyWallIndex))
-                return true;
-        }
-
-        if (applyQuickRightPart(numbers, pivotIndex, copyWallIndex + 1))
-            return true;
-
-        return true;
+        array[last] = array[i];
+        array[i] = pivot;
+        printArray(array);
+        quickSort(array, first, i - 1);
+        quickSort(array, i + 1, last);
     }
 
-    private static boolean applyQuickLeftPart(int[] numbers, int pivotIndex, int wallIndex) {
-        if (pivotIndex < 0 || pivotIndex >= numbers.length)
-            return true;
-
-        if (realPivotIndex != 0) {
-            pivotIndex = realPivotIndex;
+    private static void printArray(int[] array) {
+        for (int number : array) {
+            System.out.print(number + " ");
         }
 
-        boolean isPivotGreates = false;
-        for (int i = 0; i < pivotIndex; i++) {
-            if (numbers[i] <= numbers[pivotIndex]) {
-                int temp = numbers[wallIndex];
-                numbers[wallIndex] = numbers[i];
-                numbers[i] = temp;
-
-                wallIndex++;
-            } else {
-                isPivotGreates = true;
-            }
-        }
-
-        if (!isPivotGreates)
-            realPivotIndex--;
-
-        if (!hasPivot) {
-            realPivotIndex = wallIndex - 1;
-            hasPivot = true;
-        }
-
-        int temp = numbers[wallIndex];
-        numbers[wallIndex] = numbers[pivotIndex];
-        numbers[pivotIndex] = temp;
-
-        if (!hasWallIndex) {
-            wallIndexForRightPart = wallIndex + 1;
-            hasWallIndex = true;
-        }
-
-        if (applyQuickLeftPart(numbers, realPivotIndex - 1, 0))
-            return true;
-
-        return true;
+        System.out.println();
     }
 }
+

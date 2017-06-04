@@ -6,14 +6,15 @@ public class p04_towerOfHanoi {
     static int stepsCount = 1;
 
     // using ArrayList instead of LinkedList for the "clearer" output
-    static ArrayList<Integer> source = new ArrayList<>();
-    static ArrayList<Integer> spare = new ArrayList<>();
-    static ArrayList<Integer> destination = new ArrayList<>();
+    private static ArrayList<Integer> source = new ArrayList<>();
+    private static ArrayList<Integer> spare = new ArrayList<>();
+    private static ArrayList<Integer> destination = new ArrayList<>();
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         System.out.print("Enter number of discs: ");
         int n = in.nextInt();
+
         fillSource(n, source);
 
         moveDiscs(n, source, spare, destination, "Source", "Spare", "Destination");
@@ -21,8 +22,7 @@ public class p04_towerOfHanoi {
         System.out.println("destination rod " + destination);
     }
 
-    static void moveDiscs(int n, ArrayList<Integer> source, ArrayList<Integer> spare, ArrayList<Integer> destination, String from, String using, String to)
-    {
+    private static void moveDiscs(int n, ArrayList<Integer> source, ArrayList<Integer> spare, ArrayList<Integer> destination, String from, String using, String to) {
         if (n > 0) {
             moveDiscs(n - 1, source, destination, spare, from, to, using);
 
