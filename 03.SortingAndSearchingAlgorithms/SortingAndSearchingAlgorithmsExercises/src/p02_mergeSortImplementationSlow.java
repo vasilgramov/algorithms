@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class p02_mergeSortImplementation {
+public class p02_mergeSortImplementationSlow {
     public static void main(String[] args) {
         /*
         sample inputs
@@ -24,7 +24,7 @@ public class p02_mergeSortImplementation {
 
         mergeSort(unsortedElements, 0, unsortedElements.length - 1);
 
-        System.out.println(Arrays.toString(unsortedElements));
+        System.out.println(Arrays.toString(unsortedElements).replace("[", "").replace("]", "").replace(",", ""));
     }
 
     private static void mergeSort(int[] unsortedElements, int lowIndex, int highIndex) {
