@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class p02_mergeSortImplementationSlow {
+public class p02_mergeSortSlow {
     public static void main(String[] args) {
         /*
         sample inputs

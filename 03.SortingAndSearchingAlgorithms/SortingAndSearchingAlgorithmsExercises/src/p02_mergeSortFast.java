@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Created by vladix on 7/9/17.
  */
-public class p02_mergeSortImplementationFast {
+public class p02_mergeSortFast {
 
     private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 

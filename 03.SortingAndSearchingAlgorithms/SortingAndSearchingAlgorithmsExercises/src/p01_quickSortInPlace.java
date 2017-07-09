@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class p01_quickSortImplementation {
+public class p01_quickSortInPlace {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

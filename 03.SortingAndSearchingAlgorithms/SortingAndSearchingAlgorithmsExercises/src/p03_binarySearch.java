@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 /**
  * Created by vladix on 7/9/17.
  */
-public class p05_binarySearch {
+public class p03_binarySearch {
 
     private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
