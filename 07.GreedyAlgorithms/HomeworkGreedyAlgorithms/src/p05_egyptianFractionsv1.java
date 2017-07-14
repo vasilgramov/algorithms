@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class p05_egyptianFractions {
+public class p05_egyptianFractionsv1 {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

@@ -1,49 +1,81 @@
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class p02_processorScheduling {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        TreeSet<Task> tasksSet = new TreeSet<>();
-        int tasks = Integer.parseInt(in.nextLine().split("\\s+")[1]);
-        for (int i = 0; i < tasks; i++) {
-            String[] tasksArgs = in.nextLine().split(" – ");
-            int value = Integer.parseInt(tasksArgs[0]);
-            int deadline = Integer.parseInt(tasksArgs[1]);
+        int tasksCount = Integer.parseInt(in.nextLine().substring(7));
 
-            Task task = new Task(value, deadline);
-            tasksSet.add(task);
+        Set<Task> tasks = new TreeSet<>();
+        for (int i = 0; i < tasksCount; i++) {
+            String[] tokens = in.nextLine().split(" - ");
+            int value = Integer.parseInt(tokens[0]);
+            int deadline = Integer.parseInt(tokens[1]);
+
+            Task task = new Task(i + 1, value, deadline);
+            tasks.add(task);
         }
 
-        int line = 1;
-        while (!tasksSet.isEmpty()) {
-            Task task = tasksSet.pollLast();
-            if (task.deadline >= line) {
-                System.out.println(task);
-                line++;
+        Task withSmallestDeadLine = null;
+        Task withBiggestDeadLine = null;
+        List<Task> taken = new ArrayList<>();
+        for (Task task : tasks) {
+            if (taken.size() == 0) {
+                taken.add(task);
+                withSmallestDeadLine = task;
+                withBiggestDeadLine = task;
+            } else {
+                if (task.deadline > withBiggestDeadLine.deadline) {
+                    taken.add(task);
+                    withBiggestDeadLine = task;
+                } else {
+                    // counts the tasks with smaller or equal deadline than current taks
+                    int count = 0;
+                    for (Task t : taken) {
+                        if (t.deadline <= task.deadline) count++;
+                    }
+
+                    if (count < task.deadline && withBiggestDeadLine.deadline + count > taken.size()) {
+                        taken.add(task);
+                    }
+                }
             }
         }
+
+
+        List<String> indeces = new ArrayList<>();
+        final int[] totalValue = {0};
+        taken.stream().sorted((t1, t2) -> {
+            int cmp = Integer.compare(t1.deadline, t2.deadline);
+            if (cmp == 0) {
+                cmp = Integer.compare(t2.value, t1.value);
+            }
+
+            return cmp;
+        }).forEach(t -> {
+            indeces.add(t.index + "");
+            totalValue[0] += t.value;
+        });
+
+        System.out.println(String.format("Optimal schedule: %s", String.join(" -> ", indeces)));
+        System.out.println(String.format("Total value: %d", totalValue[0]));
     }
 
     private static class Task implements Comparable<Task> {
+        private int index;
         private int value;
         private int deadline;
 
-        public Task(int value, int deadline) {
+        public Task(int index, int value, int deadline) {
+            this.index = index;
             this.value = value;
             this.deadline = deadline;
         }
 
-
         @Override
         public int compareTo(Task other) {
-            if (this.deadline == other.deadline) {
-                return Integer.compare(this.value, other.value);
-            }
-
-            return Integer.compare(other.deadline, this.deadline);
+            return Integer.compare(other.value, this.value);
         }
 
         @Override
