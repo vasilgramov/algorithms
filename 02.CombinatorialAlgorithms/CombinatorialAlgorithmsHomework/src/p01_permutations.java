@@ -1,30 +1,47 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class p01_permutations {
     static int[] arr;
-    static int permutationsCounter = 0;
+    static int targetSum;
+
+    static Set<String> printed = new HashSet<>();
+    static StringBuilder result = new StringBuilder();
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
-        int n = Integer.parseInt(in.nextLine());
-        arr = new int[n];
-        fillArray(n);
+        String[] tokens = in.nextLine().split(" ");
+        arr = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            arr[i] = Integer.parseInt(tokens[i]);
+        }
+
+        targetSum = Integer.parseInt(in.nextLine());
 
         createAllPermutations(0);
-        System.out.println("Total permutations: " + permutationsCounter);
+        System.out.println(result);
     }
 
-    private static void fillArray(int n) {
-        for (int i = 0; i < n; i++) {
-            arr[i] = i + 1;
-        }
-    }
 
     private static void createAllPermutations(int index) {
         if (index == arr.length) {
-            System.out.println(Arrays.toString(arr));
-            permutationsCounter++;
+
+            int sum = 0;
+            Deque<Integer> taken = new ArrayDeque<>();
+            for (int i = 0; i < arr.length; i++) {
+                sum += (arr[i] * (i + 1));
+                taken.addLast(arr[i]);
+                if (sum == targetSum) {
+                    if (!printed.contains(taken.toString())) {
+                        result.append(taken.toString().replace(",", "")).append("\n");
+                        printed.add(taken.toString());
+                    }
+                }
+
+
+                if (sum > 10) break;
+            }
+
             return;
         }
 

@@ -19,9 +19,9 @@ public class combinatorialAlgorithms {
 
 //        createVariationWithRepetitionRecursive(0); // n ^ k
 
-//        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
+        createVariationsWithoutRepetitionRecursive(0); // boolean[] => (n) * (n - 1) * (n - 2) - k times
 
-        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
+//        createVariationsWithoutRepetitionRecursiveOptimized(0); // allElements[] (n) * (n - 1) * (n - 2) - k times
 
 //        createPermutationsWithRepetitionRecursive(0);   // n ^ n
 
